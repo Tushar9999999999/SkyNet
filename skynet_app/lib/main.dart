@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:html';
-
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,8 +14,30 @@ void main() {
 }
 
 class Home extends StatelessWidget {
+  //StatefulWidget {
+  /*Widget webcam;
+  VideoElement webcam_video;
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    webcam_video = VideoElement();
+    ui.platformViewRegistry.registerViewFactory(
+        'webcamVideoElement', (int viewId) => webcam_video);
+    webcam = HtmlElementView(key: UniqueKey(), viewType: 'webcam_video');
+
+    window.navigator.getUserMedia(video: true).then((MediaStream stream) {
+      webcam_video.srcObject = stream;
+    });
+  }*/
+
   @override
   Widget build(BuildContext context) {
+    double screen_width = MediaQuery.of(context).size.width;
+    double screen_height = MediaQuery.of(context).size.height;
+    double newWidth = screen_width * 0.85;
+    double newHeight = screen_height * 0.80;
+
     return MaterialApp(
       title: 'SkyNet Home',
       home: Scaffold(
@@ -26,7 +48,8 @@ class Home extends StatelessWidget {
         drawer: Drawer(
           child: ListView(
             children: <Widget>[
-              new ElevatedButton(
+              new MaterialButton(
+                hoverColor: Colors.lightBlue[100],
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -35,7 +58,8 @@ class Home extends StatelessWidget {
                 },
                 child: new Text('View stats'),
               ),
-              new ElevatedButton(
+              new MaterialButton(
+                hoverColor: Colors.lightBlue[100],
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -44,11 +68,13 @@ class Home extends StatelessWidget {
                 },
                 child: new Text('View findings'),
               ),
-              new ElevatedButton(
+              new MaterialButton(
+                hoverColor: Colors.lightBlue[100],
                 onPressed: null,
                 child: new Text('Download raw stats'),
               ),
-              new ElevatedButton(
+              new MaterialButton(
+                hoverColor: Colors.lightBlue[100],
                 onPressed: null,
                 child: new Text('Download findings'),
               ),
@@ -56,11 +82,36 @@ class Home extends StatelessWidget {
           ),
         ),
         body: Center(
+            child: Column(
+          children: <Widget>[
+            Text(
+              'Camera view',
+              style: TextStyle(
+                fontSize: 35,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            Container(
+              width: newWidth,
+              height: newHeight,
+              color: Colors.blueGrey[100],
+              //child: webcam,
+            )
+          ],
+        )
+
             /*
             should be camera view / etc
           ),*/
+
             ),
         //backgroundColor: Colors.cyan,
+        /*floatingActionButton: FloatingActionButton(
+          onPressed: () => webcam_video.srcObject.active
+              ? webcam_video.play()
+              : webcam_video.pause(),
+          child: Icon(Icons.camera_alt),
+        ),*/
       ),
     );
   }
