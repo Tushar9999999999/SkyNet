@@ -1,0 +1,2 @@
+https://github.com/AlexeyAB/darknet
+Download model and compile from the above link
